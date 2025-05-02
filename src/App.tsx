@@ -1,5 +1,5 @@
 import { NavbarDemo } from "./components/NavBar";
-import Home from "./pages/HomePage";
+import Home from "./pages/LandingPage";
 import TrianglesBackground from "./components/DynamicBG";
 
 function App() {

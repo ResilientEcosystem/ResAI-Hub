@@ -26,14 +26,13 @@ a:hover {
   color: #535bf2;
 }
 
+html,
 body {
   margin: 0;
   padding: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  background: linear-gradient(180deg, #0d1117, #12081f);
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #0d1117, #170a28); /* Ensure the background is applied here */
 }
 
 h1 {
@@ -80,8 +79,6 @@ button:focus-visible {
   z-index: 0;
   background-color: transparent;
 }
-
-
 
 @layer base {
   :root {
@@ -138,8 +135,6 @@ button:focus-visible {
     --chart-5: 340 75% 55%;
   }
 }
-
-
 
 @layer base {
   * {
