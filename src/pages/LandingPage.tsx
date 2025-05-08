@@ -1,7 +1,7 @@
 import { Card, CardContent } from "../components/ui/card";
 import { HeroSectionOne } from "../components/Hero";
 
-const Home = () => {
+const Landing = () => {
   return (
     <div className="relative z-10 flex justify-center items-center min-h-screen">
       <div className="w-full max-w-4xl">
@@ -15,4 +15,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Landing;

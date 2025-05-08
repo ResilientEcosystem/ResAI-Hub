@@ -1,20 +1,27 @@
-import { NavbarDemo } from "./components/NavBar";
-import Home from "./pages/LandingPage";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/Home";
 import TrianglesBackground from "./components/DynamicBG";
+import Landing from "./pages/LandingPage";
+import { NavbarDemo } from "./components/NavBar";
 
 function App() {
   return (
-    <div className="relative">
-      {/* Animated background */}
-      <TrianglesBackground />
-      {/* <div className="min-h-screen bg-white dark:bg-neutral-900 text-black dark:text-white">
-      <NavbarDemo />
-    </div> */}
-      {/* Main content (pages) */}
-      <div className="relative z-10">
-        <Home />
+    <Router>
+      <div className="relative">
+        {/* Animated background */}
+        <TrianglesBackground />
+        {/* Main content (pages) */}
+        {/* <div className="relative z-50">
+          <NavbarDemo />
+        </div> */}
+        {/* <div className="relative z-10 pt-16"> */}
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/Home" element={<HomePage />} />
+          </Routes>
+        {/* </div> */}
       </div>
-    </div>
+    </Router>
   );
 }
 
