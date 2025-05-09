@@ -39,9 +39,7 @@ export function HeroSectionOne() {
           }}
           className="relative z-10 mx-auto max-w-xl py-4 text-center text-lg font-normal text-gray-300"
         >
-          ResAI is the home for our next-generation AI tools on ResilientDB. 
-          Browse, test, and experience the latest in distributed AI innovation.
-
+          ResAI unlocks next-gen AI on ResilientDB — browse, test, and experience data and intelligence working together.
         </motion.p>
         <motion.div
           initial={{

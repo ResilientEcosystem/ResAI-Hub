@@ -15,7 +15,7 @@ const Carousel = () => {
       <Swiper
         effect={"fade"}
         loop={true}
-        // autoplay={{ delay: 5000 }}
+        autoplay={{ delay: 5000 }}
         navigation={{
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
@@ -77,15 +77,14 @@ const Carousel = () => {
               <Lottie
                 animationData={animationData2}
                 loop={true}
-                className="w-[400px] h-[400px] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px]"
+                className="w-[340px] h-[340px] md:w-[430px] md:h-[430px] lg:w-[540px] lg:h-[540px]"
               />
             </div>
-
             {/* Right: Text + Button */}
             <div className="flex-1 flex flex-col justify-center text-left">
               <h2 className="font-serif text-6xl md:text-7xl font-extrabold mb-6 tracking-tight">
                 <span className="bg-gradient-to-r from-indigo-400 to-cyan-500 bg-clip-text text-transparent">
-                  Introducing Beacon
+                  Introducing: Beacon
                 </span>
               </h2>
 
