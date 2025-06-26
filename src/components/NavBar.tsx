@@ -94,7 +94,7 @@ export function Navbar({ className }: NavbarProps) {
 
       {/* Navigation Buttons - Desktop */}
       <div className="hidden md:flex">
-        {navItems.map((item, index) => (
+        {navItems.map((item) => (
           <Link to={item.path} key={item.name}>
             <motion.button
               className={cn(
@@ -225,7 +225,7 @@ export function Navbar({ className }: NavbarProps) {
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
             <div className="flex flex-col p-4">
-              {navItems.map((item, index) => (
+              {navItems.map((item) => (
                 <Link to={item.path} key={item.name}>
                   <motion.button
                     className={cn(
@@ -237,7 +237,7 @@ export function Navbar({ className }: NavbarProps) {
                     }}
                     initial={{ x: -20, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ duration: 0.2 }}
                   >
                     {item.name}
                   </motion.button>
