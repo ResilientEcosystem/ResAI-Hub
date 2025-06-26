@@ -92,9 +92,14 @@ const Carousel = () => {
               <p className="font-sans text-xl md:text-2xl text-gray-100 mb-8 leading-relaxed max-w-xl">
               With Beacon, explore your documentation like never before — ask questions, dive deep, and connect directly to the underlying code.
               </p>
-              <button className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-700 hover:to-cyan-700 rounded-lg text-white font-semibold shadow-lg transition transform hover:-translate-y-1 hover:shadow-xl w-fit text-lg">
+              <a 
+                href="https://beacon.resilientdb.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-700 hover:to-cyan-700 rounded-lg text-white font-semibold shadow-lg transition transform hover:-translate-y-1 hover:shadow-xl w-fit text-lg inline-block"
+              >
                 Launch Beacon
-              </button>
+              </a>
             </div>
             </div>
           </div>
@@ -114,7 +119,7 @@ const Carousel = () => {
             </h2>
 
             <p className="font-sans text-xl md:text-2xl text-gray-100 mb-8 leading-relaxed">
-              We’re brewing up something exciting — stay tuned as we build the next chapter of our platform!
+              We're brewing up something exciting — stay tuned as we build the next chapter of our platform!
             </p>
 
             <button className="px-8 py-4 bg-gradient-to-r from-rose-600 to-orange-600 hover:from-rose-700 hover:to-orange-700 rounded-lg text-white font-semibold shadow-lg transition transform hover:-translate-y-1 hover:shadow-xl w-fit text-lg">

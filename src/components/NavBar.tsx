@@ -79,6 +79,19 @@ export function Navbar({ className }: NavbarProps) {
         </Link>
       </motion.div>
 
+      {/* Beta Version Indicator */}
+      <motion.div
+        className="relative z-10 mr-6 hidden md:block"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+      >
+        <span className="inline-flex items-center rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 px-3 py-1 text-xs font-medium text-purple-300 border border-purple-500/30 backdrop-blur-sm">
+          <span className="mr-1.5 h-1.5 w-1.5 rounded-full bg-purple-400 animate-pulse"></span>
+          Beta - Under Development
+        </span>
+      </motion.div>
+
       {/* Navigation Buttons - Desktop */}
       <div className="hidden md:flex">
         {navItems.map((item, index) => (
@@ -145,7 +158,7 @@ export function Navbar({ className }: NavbarProps) {
               whileTap={{ scale: 0.95 }}
               aria-label="Search"
             >
-              <Search size={scrolled ? 20 : 24} /> {/* Larger icon in both states */}
+              <Search size={scrolled ? 20 : 36} /> {/* Much larger difference: 20 when scrolled, 36 when not */}
             </motion.button>
           )}
         </AnimatePresence>

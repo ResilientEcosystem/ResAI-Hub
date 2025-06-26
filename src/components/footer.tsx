@@ -79,7 +79,7 @@ export function Footer({ className, variant = "darker-gradient", ...props }: Foo
           <FooterLink href="/authors" icon={<Users />}>
             Meet the team
           </FooterLink>
-          <FooterLink href="/about" icon={<Info />}>
+          <FooterLink href="https://expolab.resilientdb.com/" icon={<Info />}>
             About Us
           </FooterLink>
         </motion.div>
