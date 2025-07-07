@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Search, Moon, Sun, Menu, X } from "lucide-react"
+import { Moon, Sun, Menu, X } from "lucide-react"
 import { cn } from "../lib/utils"
 import { Link, useLocation } from "react-router-dom"
 
@@ -12,7 +12,6 @@ interface NavbarProps {
 
 export function Navbar({ className }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
-  const [searchActive, setSearchActive] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(true)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const location = useLocation()
@@ -123,45 +122,21 @@ export function Navbar({ className }: NavbarProps) {
 
       {/* Right Side Elements */}
       <div className="flex items-center space-x-2">
-        {/* Search Bar */}
-        <AnimatePresence>
-          {searchActive ? (
-            <motion.div
-              initial={{ width: 40, opacity: 0 }}
-              animate={{ width: 200, opacity: 1 }}
-              exit={{ width: 40, opacity: 0 }}
-              className="relative flex items-center"
-            >
-              <input
-                type="text"
-                placeholder="Search..."
-                className="w-full rounded-full border-0 bg-white/10 px-4 py-2 pl-10 text-sm text-white placeholder-gray-400 backdrop-blur-lg focus:outline-none focus:ring-1 focus:ring-purple-500"
-                autoFocus
-                onBlur={() => setSearchActive(false)}
-              />
-              <Search size={20} className="absolute left-3 text-gray-400" />
-              <button
-                className="absolute right-3 text-gray-400 hover:text-white"
-                onClick={() => setSearchActive(false)}
-              >
-                <X size={16} />
-              </button>
-            </motion.div>
-          ) : (
-            <motion.button
-              className={cn(
-                "flex items-center justify-center rounded-full bg-white/5 text-gray-300 backdrop-blur-lg transition-colors hover:bg-white/10 hover:text-white",
-                scrolled ? "h-10 w-10" : "h-12 w-12", // Larger button initially
-              )}
-              onClick={() => setSearchActive(true)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label="Search"
-            >
-              <Search size={scrolled ? 20 : 36} /> {/* Much larger difference: 20 when scrolled, 36 when not */}
-            </motion.button>
+        {/* ResilientDB Link Button */}
+        <motion.a
+          href="https://resilientdb.apache.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={cn(
+            "flex items-center justify-center rounded-full bg-white/5 text-gray-300 backdrop-blur-lg transition-colors hover:bg-white/10 hover:text-white",
+            scrolled ? "h-10 px-4" : "h-12 px-5", // Larger button initially
           )}
-        </AnimatePresence>
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          aria-label="Visit ResilientDB"
+        >
+          <span className="text-sm font-medium">ResilientDB</span>
+        </motion.a>
 
         {/* Theme Toggle */}
         <motion.button
