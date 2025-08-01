@@ -13,7 +13,16 @@ const HomePage = () => {
       <div className="w-full max-w-7xl flex flex-col md:flex-row items-center gap-12 mx-auto mt-15">
         {/* Left Side - SVG / Lottie Animation */}
         <div className="flex-1 flex items-center justify-center">
-          <Lottie animationData={animationData1} loop={true} className="w-70 h-70 md:w-85 md:h-85" />
+          <Lottie 
+            animationData={animationData1} 
+            loop={true} 
+            className="w-70 h-70 md:w-85 md:h-85"
+            style={{ maxWidth: '100%', height: 'auto' }}
+            rendererSettings={{
+              preserveAspectRatio: 'xMidYMid slice'
+            }}
+            speed={0.8} // Reduced animation speed
+          />
         </div>
         {/* Right Side - Text */}
         <div className="flex-1 flex flex-col justify-center text-left ml-10">
@@ -42,7 +51,16 @@ const HomePage = () => {
 
       {/* Right Side - SVG / Lottie Animation */}
       <div className="flex-1 flex items-center justify-center">
-        <Lottie animationData={animationData2} loop={true} className="w-[380px] h-[380px] md:w-[520px] md:h-[520px]" />
+        <Lottie 
+          animationData={animationData2} 
+          loop={true} 
+          className="w-[380px] h-[380px] md:w-[520px] md:h-[520px]"
+          style={{ maxWidth: '100%', height: 'auto' }}
+          rendererSettings={{
+            preserveAspectRatio: 'xMidYMid slice'
+          }}
+          speed={0.8} // Reduced animation speed
+        />
       </div>
     </div>
     </div>

@@ -4,6 +4,7 @@ import TrianglesBackground from "./components/DynamicBG"
 import Landing from "./pages/LandingPage"
 import { Footer } from "./components/footer"
 import { Navbar } from "./components/NavBar"
+import { PerformanceOptimizer } from "./components/PerformanceOptimizer"
 
 // Wrapper component to conditionally render the navbar
 function AppContent() {
@@ -16,14 +17,18 @@ function AppContent() {
       {!isLandingPage && <Navbar />}
 
       <div className="relative flex-1">
-        {/* Animated background */}
-        <TrianglesBackground />
+        {/* Animated background - conditionally rendered based on performance */}
+        <PerformanceOptimizer>
+          <TrianglesBackground />
+        </PerformanceOptimizer>
 
         {/* Main content (pages) */}
         <div className="relative z-10">
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/Home" element={<HomePage />} />
+            <Route path="/tools" element={<HomePage />} />
+            <Route path="/about" element={<HomePage />} />
           </Routes>
         </div>
       </div>

@@ -31,8 +31,8 @@ export function Navbar({ className }: NavbarProps) {
 
   // Navigation items with their routes
   const navItems = [
-    { name: "Home", path: "/" },
-    { name: "Tools", path: "/Home" },
+    { name: "Home", path: "/Home" },
+    { name: "Tools", path: "/tools" },
     { name: "About", path: "/about" },
   ]
 

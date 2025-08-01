@@ -4,6 +4,7 @@ import { EffectFade, Autoplay, Navigation } from "swiper/modules"
 import Lottie from "lottie-react"
 import animationData1 from "../../assets/ResEchoSVG.json"
 import animationData2 from "../../assets/DocumentationSVG.json"
+import animationData3 from "../../assets/Coin.json"
 
 import "swiper/css"
 import "swiper/css/effect-fade"
@@ -72,7 +73,7 @@ const Carousel = () => {
 
         {/* Content container with padding */}
         <div className="relative z-10 h-full w-full px-8 md:px-16 lg:px-24 flex items-center justify-center">
-          <div className="max-w-7xl w-full flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+          <div className="max-w-7xl w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
             {/* Left: Lottie Animation */}
             <div className="flex-1 flex justify-center items-center">
               <Lottie
@@ -105,7 +106,47 @@ const Carousel = () => {
           </div>
         </SwiperSlide>
 
-        <SwiperSlide className="relative bg-gradient-to-b from-rose-800 to-transparent">
+        <SwiperSlide className="relative bg-gradient-to-b from-emerald-800 to-transparent">
+        {/* Overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-transparent"></div>
+
+        {/* Content container with padding */}
+        <div className="relative z-10 h-full w-full px-8 md:px-16 lg:px-24 flex items-center justify-center">
+          <div className="max-w-7xl w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
+            {/* Left: Text + Button */}
+            <div className="flex-1 flex flex-col justify-center text-left">
+              <h2 className="font-serif text-6xl md:text-7xl font-extrabold mb-6 tracking-tight">
+                <span className="bg-gradient-to-r from-emerald-400 to-teal-500 bg-clip-text text-transparent">
+                  Discover ContractForge
+                </span>
+              </h2>
+
+              <p className="font-sans text-xl md:text-2xl text-gray-100 mb-8 leading-relaxed max-w-xl">
+              Forge smart contracts with AI assistance. Design, deploy, and manage blockchain contracts with intelligent suggestions and automated testing.
+              </p>
+              <a 
+                href="https://contractforge.resilientdb.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 rounded-lg text-white font-semibold shadow-lg transition transform hover:-translate-y-1 hover:shadow-xl w-fit text-lg inline-block"
+              >
+                Launch ContractForge
+              </a>
+            </div>
+
+            {/* Right: Lottie Animation */}
+            <div className="flex-1 flex justify-center items-center">
+              <Lottie
+                animationData={animationData3}
+                loop={true}
+                className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px]"
+              />
+            </div>
+          </div>
+        </div>
+        </SwiperSlide>
+
+        <SwiperSlide className="relative bg-gradient-to-b from-purple-800 to-transparent">
         {/* Overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-transparent"></div>
 
@@ -113,7 +154,7 @@ const Carousel = () => {
         <div className="relative z-10 h-full w-full px-8 md:px-16 lg:px-24 flex items-center justify-center">
           <div className="max-w-3xl w-full flex flex-col items-center text-center">
             <h2 className="font-serif text-6xl md:text-7xl font-extrabold mb-6 tracking-tight">
-              <span className="bg-gradient-to-r from-rose-400 to-orange-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
                 🚀 Coming Soon!
               </span>
             </h2>
@@ -122,16 +163,21 @@ const Carousel = () => {
               We're brewing up something exciting — stay tuned as we build the next chapter of our platform!
             </p>
 
-            <button className="px-8 py-4 bg-gradient-to-r from-rose-600 to-orange-600 hover:from-rose-700 hover:to-orange-700 rounded-lg text-white font-semibold shadow-lg transition transform hover:-translate-y-1 hover:shadow-xl w-fit text-lg">
-              Notify Me
-            </button>
+            <a 
+              href="https://github.com/ResilientEcosystem/ResAI-Hub" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 rounded-lg text-white font-semibold shadow-lg transition transform hover:-translate-y-1 hover:shadow-xl w-fit text-lg inline-block"
+            >
+              ⭐ Star on GitHub
+            </a>
           </div>
         </div>
       </SwiperSlide>
 
-        {/* Navigation arrows with better styling */}
-        <div className="swiper-button-prev after:text-white after:text-2xl after:content-['prev'] after:font-bold"></div>
-        <div className="swiper-button-next after:text-white after:text-2xl after:content-['next'] after:font-bold"></div>
+        {/* Navigation arrows with better styling and proper z-index */}
+        <div className="swiper-button-prev after:text-white after:text-2xl after:content-['prev'] after:font-bold z-20"></div>
+        <div className="swiper-button-next after:text-white after:text-2xl after:content-['next'] after:font-bold z-20"></div>
       </Swiper>
     </div>
   )
