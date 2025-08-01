@@ -92,7 +92,7 @@ const Carousel = () => {
                 href="https://beacon.resilientdb.com/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-700 hover:to-cyan-700 rounded-lg text-white font-semibold shadow-lg transition transform hover:-translate-y-1 hover:shadow-xl w-fit text-lg inline-block"
+                className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-700 hover:to-cyan-700 rounded-lg text-white hover:text-white font-semibold shadow-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl w-fit text-lg inline-block"
               >
                 Launch Beacon
               </a>
@@ -123,9 +123,9 @@ const Carousel = () => {
                 href="https://contractforge.resilientdb.com/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 rounded-lg text-white font-semibold shadow-lg transition transform hover:-translate-y-1 hover:shadow-xl w-fit text-lg inline-block"
+                className="px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 rounded-lg text-white hover:text-white font-semibold shadow-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl w-fit text-lg inline-block"
               >
-                Launch ContractForge
+                Write Your Contract
               </a>
             </div>
 
@@ -162,7 +162,7 @@ const Carousel = () => {
               href="https://github.com/ResilientEcosystem/ResAI-Hub" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 rounded-lg text-white font-semibold shadow-lg transition transform hover:-translate-y-1 hover:shadow-xl w-fit text-lg inline-block"
+              className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 rounded-lg text-white hover:text-white font-semibold shadow-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl w-fit text-lg inline-block"
             >
               ⭐ Star on GitHub
             </a>
