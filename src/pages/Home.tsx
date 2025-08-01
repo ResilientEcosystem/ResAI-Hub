@@ -21,7 +21,6 @@ const HomePage = () => {
             rendererSettings={{
               preserveAspectRatio: 'xMidYMid slice'
             }}
-            speed={0.8} // Reduced animation speed
           />
         </div>
         {/* Right Side - Text */}
@@ -59,7 +58,6 @@ const HomePage = () => {
           rendererSettings={{
             preserveAspectRatio: 'xMidYMid slice'
           }}
-          speed={0.8} // Reduced animation speed
         />
       </div>
     </div>

@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom"
 import HomePage from "./pages/Home"
+import ToolsPage from "./pages/ToolsPage"
 import TrianglesBackground from "./components/DynamicBG"
 import Landing from "./pages/LandingPage"
 import { Footer } from "./components/footer"
 import { Navbar } from "./components/NavBar"
-import { PerformanceOptimizer } from "./components/PerformanceOptimizer"
 
 // Wrapper component to conditionally render the navbar
 function AppContent() {
@@ -18,16 +18,14 @@ function AppContent() {
 
       <div className="relative flex-1">
         {/* Animated background - conditionally rendered based on performance */}
-        <PerformanceOptimizer>
-          <TrianglesBackground />
-        </PerformanceOptimizer>
+        <TrianglesBackground />
 
         {/* Main content (pages) */}
         <div className="relative z-10">
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/Home" element={<HomePage />} />
-            <Route path="/tools" element={<HomePage />} />
+            <Route path="/tools" element={<ToolsPage />} />
             <Route path="/about" element={<HomePage />} />
           </Routes>
         </div>

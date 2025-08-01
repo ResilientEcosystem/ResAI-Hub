@@ -35,11 +35,6 @@ const Carousel = () => {
             <div className="max-w-7xl w-full flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
               {/* Left: Text + Button */}
               <div className="flex-1 flex flex-col justify-center text-left">
-                {/* Logo above the title */}
-                {/* <div className="mb-4">
-                  <img src="src/assets/ResEcho Transparent.png" alt="ResEcho Logo" className="h-28 md:h-32 w-auto md:w-auto" />
-                </div> */}
-
                 <h2 className="font-serif text-6xl md:text-7xl font-extrabold mb-6 tracking-tight">
                   <span className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
                     Meet Nexus
