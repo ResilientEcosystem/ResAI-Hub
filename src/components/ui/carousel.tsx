@@ -45,9 +45,14 @@ const Carousel = () => {
                 Nexus is your intelligent gateway to ResilientDB's world. Explore consensus protocols, dive into research papers, and discover the innovations behind our database.
                 </p>
 
-                <button className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg text-white font-semibold shadow-lg transition transform hover:-translate-y-1 hover:shadow-xl w-fit text-lg">
+                <a 
+                  href="https://nexus.resilientdb.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg text-white hover:text-white font-semibold shadow-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl w-fit text-lg inline-block"
+                >
                   Talk to Nexus
-                </button>
+                </a>
               </div>
 
               {/* Right: Lottie Animation */}
