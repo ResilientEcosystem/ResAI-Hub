@@ -3,6 +3,7 @@ import HomePage from "./pages/Home"
 import ToolsPage from "./pages/ToolsPage"
 import TrianglesBackground from "./components/DynamicBG"
 import Landing from "./pages/LandingPage"
+import NotFound from "./pages/NotFound"
 import { Footer } from "./components/footer"
 import { Navbar } from "./components/NavBar"
 
@@ -27,6 +28,7 @@ function AppContent() {
             <Route path="/Home" element={<HomePage />} />
             <Route path="/tools" element={<ToolsPage />} />
             <Route path="/about" element={<HomePage />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </div>
