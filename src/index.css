@@ -40,7 +40,7 @@ html, body {
   padding: 0;
   width: 100%;
   min-height: 100%;
-  background: linear-gradient(180deg, #0d1117, #170a28);
+  background-color: hsl(var(--background));
 }
 
 
@@ -91,6 +91,8 @@ button:focus-visible {
 
 @layer base {
   :root {
+    --app-gradient-start: #ffffff;
+    --app-gradient-end: #f5f7fb;
     --background: 0 0% 100%;
     --foreground: 20 14.3% 4.1%;
     --card: 0 0% 100%;
@@ -118,6 +120,8 @@ button:focus-visible {
     --radius: 0.5rem;
   }
   .dark {
+    --app-gradient-start: #0d1117;
+    --app-gradient-end: #170a28;
     --background: 20 14.3% 4.1%;
     --foreground: 60 9.1% 97.8%;
     --card: 20 14.3% 4.1%;
@@ -151,5 +155,11 @@ button:focus-visible {
   }
   body {
     @apply bg-background text-foreground;
+    background-image: linear-gradient(180deg, var(--app-gradient-start), var(--app-gradient-end));
   }
+}
+
+/* Smooth theme transition */
+.theme-transition, .theme-transition * {
+  transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease, fill 300ms ease, stroke 300ms ease, background-image 300ms ease;
 }
