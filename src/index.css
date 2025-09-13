@@ -159,7 +159,7 @@ button:focus-visible {
   }
 }
 
-/* Smooth theme transition */
+/* Ultra smooth theme transition */
 .theme-transition, .theme-transition * {
-  transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease, fill 300ms ease, stroke 300ms ease, background-image 300ms ease;
+  transition: background-color 50ms ease, color 50ms ease, border-color 50ms ease, fill 50ms ease, stroke 50ms ease, background-image 50ms ease;
 }

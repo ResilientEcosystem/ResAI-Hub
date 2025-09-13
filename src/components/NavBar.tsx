@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Moon, Sun, Menu, X } from "lucide-react"
 import { cn } from "../lib/utils"
 import { Link, useLocation } from "react-router-dom"
+import { useTheme } from "../contexts/ThemeContext"
 
 interface NavbarProps {
   className?: string
@@ -12,9 +13,9 @@ interface NavbarProps {
 
 export function Navbar({ className }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(true)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const location = useLocation()
+  const { isDarkMode, toggleTheme } = useTheme()
 
   // Handle scroll effect for condensing
   useEffect(() => {
@@ -28,28 +29,6 @@ export function Navbar({ className }: NavbarProps) {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [scrolled])
-
-  // Initialize theme from localStorage or system preference
-  useEffect(() => {
-    const root = document.documentElement
-    const storedTheme = localStorage.getItem("theme") as "dark" | "light" | null
-    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
-    const shouldUseDark = storedTheme ? storedTheme === "dark" : prefersDark
-    setIsDarkMode(shouldUseDark)
-    root.classList.toggle("dark", shouldUseDark)
-  }, [])
-
-  // Handle theme change side effects (DOM class + persistence + smooth transition)
-  useEffect(() => {
-    const root = document.documentElement
-    root.classList.add("theme-transition")
-    root.classList.toggle("dark", isDarkMode)
-    localStorage.setItem("theme", isDarkMode ? "dark" : "light")
-    const timeout = window.setTimeout(() => {
-      root.classList.remove("theme-transition")
-    }, 300)
-    return () => window.clearTimeout(timeout)
-  }, [isDarkMode])
 
   // Navigation items with their routes
   const navItems = [
@@ -76,7 +55,7 @@ export function Navbar({ className }: NavbarProps) {
       {/* Background - adapts to light/dark */}
       <div
         className={cn(
-          "absolute inset-0 transition-all duration-300 backdrop-blur-md",
+          "absolute inset-0 transition-all duration-75 backdrop-blur-md",
           isDarkMode
             ? (scrolled
                 ? "bg-gradient-to-r from-[#080a10]/95 via-[#0a0613]/95 to-[#080a10]/95"
@@ -105,7 +84,7 @@ export function Navbar({ className }: NavbarProps) {
             src="New.png"
             alt="Logo"
             className={cn(
-              "transition-all duration-300",
+              "transition-all duration-75",
               scrolled ? "h-7 w-auto" : "h-10 w-auto",
               "drop-shadow",
               !isDarkMode && "filter brightness-0",
@@ -141,7 +120,7 @@ export function Navbar({ className }: NavbarProps) {
           <Link to={item.path} key={item.name}>
             <motion.button
               className={cn(
-                "relative mx-1 rounded-full px-4 py-2 text-sm font-medium transition-colors",
+                "relative mx-1 rounded-full px-4 py-2 text-sm font-medium transition-colors duration-75",
                 scrolled ? "py-2" : "py-3", // Taller buttons initially
                 isDarkMode
                   ? (location.pathname === item.path
@@ -178,7 +157,7 @@ export function Navbar({ className }: NavbarProps) {
           target="_blank"
           rel="noopener noreferrer"
           className={cn(
-            "flex items-center justify-center rounded-full backdrop-blur-lg transition-colors",
+            "flex items-center justify-center rounded-full backdrop-blur-lg transition-colors duration-75",
             isDarkMode
               ? "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"
               : "bg-black/5 text-gray-900 hover:bg-purple-100 hover:text-purple-800",
@@ -194,13 +173,13 @@ export function Navbar({ className }: NavbarProps) {
         {/* Theme Toggle */}
         <motion.button
           className={cn(
-            "flex items-center justify-center rounded-full backdrop-blur-lg transition-colors",
+            "flex items-center justify-center rounded-full backdrop-blur-lg transition-colors duration-75",
             isDarkMode
               ? "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"
               : "bg-black/5 text-gray-900 hover:bg-purple-100 hover:text-purple-800",
             scrolled ? "h-10 w-10" : "h-12 w-12", // Larger button initially
           )}
-          onClick={() => setIsDarkMode(!isDarkMode)}
+          onClick={toggleTheme}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           aria-label="Toggle theme"

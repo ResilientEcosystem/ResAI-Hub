@@ -6,6 +6,7 @@ import Landing from "./pages/LandingPage"
 import NotFound from "./pages/NotFound"
 import { Footer } from "./components/footer"
 import { Navbar } from "./components/NavBar"
+import { ThemeProvider } from "./contexts/ThemeContext"
 
 // Wrapper component to conditionally render the navbar
 function AppContent() {
@@ -13,7 +14,7 @@ function AppContent() {
   const isLandingPage = location.pathname === "/"
 
   return (
-    <div className="flex min-h-screen flex-col bg-gradient-to-b from-[#0d1117] to-[#170a28]">
+    <div className="flex min-h-screen flex-col bg-gradient-to-b from-[var(--app-gradient-start)] to-[var(--app-gradient-end)]">
       {/* Only show navbar on non-landing pages */}
       {!isLandingPage && <Navbar />}
 
@@ -40,9 +41,11 @@ function AppContent() {
 
 function App() {
   return (
-    <Router>
-      <AppContent />
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </ThemeProvider>
   )
 }
 
