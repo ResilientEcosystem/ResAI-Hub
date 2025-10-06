@@ -5,6 +5,7 @@ import { useState, useEffect } from "react"
 import { Github, ExternalLink, Users, Info, Heart } from "lucide-react"
 import { motion } from "framer-motion"
 import { cn } from "../lib/utils"
+import { useTheme } from "../contexts/ThemeContext"
 
 interface FooterProps extends React.HTMLAttributes<HTMLElement> {
   variant?: "solid" | "darker-gradient" | "subtle-pattern"
@@ -12,29 +13,46 @@ interface FooterProps extends React.HTMLAttributes<HTMLElement> {
 
 export function Footer({ className, variant = "darker-gradient", ...props }: FooterProps) {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
+  const { isDarkMode } = useTheme()
 
   useEffect(() => {
     setCurrentYear(new Date().getFullYear())
   }, [])
 
-  // Background classes based on variant
+  // Background classes based on variant and theme
   const getBgClass = () => {
-    switch (variant) {
-      case "solid":
-        return "bg-[#0f0a1e]" // Solid dark color that's slightly darker than the end of your site gradient
-      case "darker-gradient":
-        return "bg-gradient-to-b from-[#170a28] to-[#0a0517]" // Continues from where your site ends to even darker
-      case "subtle-pattern":
-        return "bg-[#120920]" // Base color with pattern added via the decorative elements
-      default:
-        return "bg-gradient-to-b from-[#170a28] to-[#0a0517]"
+    if (isDarkMode) {
+      switch (variant) {
+        case "solid":
+          return "bg-[#0f0a1e]" // Solid dark color that's slightly darker than the end of your site gradient
+        case "darker-gradient":
+          return "bg-gradient-to-b from-[#170a28] to-[#0a0517]" // Continues from where your site ends to even darker
+        case "subtle-pattern":
+          return "bg-[#120920]" // Base color with pattern added via the decorative elements
+        default:
+          return "bg-gradient-to-b from-[#170a28] to-[#0a0517]"
+      }
+    } else {
+      switch (variant) {
+        case "solid":
+          return "bg-[#f8f9fa]" // Light solid color
+        case "darker-gradient":
+          return "bg-gradient-to-b from-[#f5f7fb] to-[#e8ecf0]" // Light gradient
+        case "subtle-pattern":
+          return "bg-[#f0f2f5]" // Light base color
+        default:
+          return "bg-gradient-to-b from-[#f5f7fb] to-[#e8ecf0]"
+      }
     }
   }
 
   return (
     <footer
       className={cn(
-        "relative mt-auto w-full overflow-hidden border-t border-white/10 py-10 text-white",
+        "relative mt-auto w-full overflow-hidden border-t py-10",
+        isDarkMode 
+          ? "border-white/10 text-white" 
+          : "border-gray-200 text-gray-800",
         getBgClass(),
         className,
       )}
@@ -50,14 +68,24 @@ export function Footer({ className, variant = "darker-gradient", ...props }: Foo
             className="mb-4"
           >
             <a href="/" className="inline-block">
-              <img src="New.png" alt="Logo" className="h-24 w-90 transition-transform duration-300 hover:scale-110" />
+              <img 
+                src="New.png" 
+                alt="Logo" 
+                className={cn(
+                  "h-24 w-90 transition-transform duration-75 hover:scale-110",
+                  !isDarkMode && "filter brightness-0"
+                )} 
+              />
             </a>
           </motion.div>
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-sm text-gray-400"
+            className={cn(
+              "text-sm",
+              isDarkMode ? "text-gray-400" : "text-gray-600"
+            )}
           >
             Made with <Heart className="inline h-4 w-4 text-pink-500" fill="#ec4899" /> @ UC Davis
           </motion.p>
@@ -89,7 +117,10 @@ export function Footer({ className, variant = "darker-gradient", ...props }: Foo
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-center text-xs text-gray-500"
+          className={cn(
+            "text-center text-xs",
+            isDarkMode ? "text-gray-500" : "text-gray-600"
+          )}
         >
           <p>© {currentYear} ExpoLab. All rights reserved.</p>
         </motion.div>
@@ -127,6 +158,7 @@ interface FooterLinkProps {
 
 function FooterLink({ href, icon, children, className }: FooterLinkProps) {
   const isExternal = href.startsWith("http")
+  const { isDarkMode } = useTheme()
 
   return (
     <a
@@ -134,14 +166,17 @@ function FooterLink({ href, icon, children, className }: FooterLinkProps) {
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noopener noreferrer" : undefined}
       className={cn(
-        "group flex items-center gap-2 rounded-full bg-white/5 px-4 py-2 text-sm font-medium text-gray-300 backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:text-white hover:shadow-lg hover:shadow-purple-500/10",
+        "group flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium backdrop-blur-sm transition-all duration-75 hover:shadow-lg hover:shadow-purple-500/10",
+        isDarkMode 
+          ? "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"
+          : "bg-gray-100 text-gray-700 hover:bg-purple-100 hover:text-purple-800",
         className,
       )}
     >
-      <span className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110">
+      <span className="transition-transform duration-75 group-hover:-translate-y-0.5 group-hover:scale-110">
         {icon}
       </span>
-      <span className="transition-transform duration-300 group-hover:-translate-y-0.5">{children}</span>
+      <span className="transition-transform duration-75 group-hover:-translate-y-0.5">{children}</span>
     </a>
   )
 }

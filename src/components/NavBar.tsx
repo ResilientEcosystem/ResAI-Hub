@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Moon, Sun, Menu, X } from "lucide-react"
 import { cn } from "../lib/utils"
 import { Link, useLocation } from "react-router-dom"
+import { useTheme } from "../contexts/ThemeContext"
 
 interface NavbarProps {
   className?: string
@@ -12,9 +13,9 @@ interface NavbarProps {
 
 export function Navbar({ className }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(true)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const location = useLocation()
+  const { isDarkMode, toggleTheme } = useTheme()
 
   // Handle scroll effect for condensing
   useEffect(() => {
@@ -51,16 +52,25 @@ export function Navbar({ className }: NavbarProps) {
         y: { duration: 0.5 }, // Slightly longer duration for the entry animation
       }}
     >
-      {/* Background - darker by default, even darker when scrolled */}
+      {/* Background - adapts to light/dark */}
       <div
         className={cn(
-          "absolute inset-0 transition-all duration-300 backdrop-blur-md",
-          scrolled
-            ? "bg-gradient-to-r from-[#080a10]/95 via-[#0a0613]/95 to-[#080a10]/95" // Even darker when scrolled
-            : "bg-gradient-to-r from-[#0a0d13]/90 via-[#0e0818]/90 to-[#0a0d13]/90", // Dark by default (what was previously the scrolled state)
+          "absolute inset-0 transition-all duration-75 backdrop-blur-md",
+          isDarkMode
+            ? (scrolled
+                ? "bg-gradient-to-r from-[#080a10]/95 via-[#0a0613]/95 to-[#080a10]/95"
+                : "bg-gradient-to-r from-[#0a0d13]/90 via-[#0e0818]/90 to-[#0a0d13]/90")
+            : (scrolled
+                ? "bg-gradient-to-r from-[#ffffff]/92 via-[#f5f0ff]/92 to-[#ffffff]/92"
+                : "bg-gradient-to-r from-[#ffffff]/75 via-[#f7f3ff]/80 to-[#ffffff]/75"),
         )}
       >
-        <div className="absolute inset-x-0 bottom-0 h-px w-full bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
+        <div
+          className={cn(
+            "absolute inset-x-0 bottom-0 h-px w-full bg-gradient-to-r from-transparent to-transparent",
+            isDarkMode ? "via-purple-500/20" : "via-purple-500/30",
+          )}
+        />
       </div>
 
       {/* Logo */}
@@ -73,7 +83,12 @@ export function Navbar({ className }: NavbarProps) {
           <img
             src="New.png"
             alt="Logo"
-            className={cn("transition-all duration-300", scrolled ? "h-7 w-auto" : "h-10 w-auto")} // Larger logo initially
+            className={cn(
+              "transition-all duration-75",
+              scrolled ? "h-7 w-auto" : "h-10 w-auto",
+              "drop-shadow",
+              !isDarkMode && "filter brightness-0",
+            )} // Larger logo initially
           />
         </Link>
       </motion.div>
@@ -85,8 +100,16 @@ export function Navbar({ className }: NavbarProps) {
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.3, duration: 0.5 }}
       >
-        <span className="inline-flex items-center rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 px-3 py-1 text-xs font-medium text-purple-300 border border-purple-500/30 backdrop-blur-sm">
-          <span className="mr-1.5 h-1.5 w-1.5 rounded-full bg-purple-400 animate-pulse"></span>
+        <span className={cn(
+          "inline-flex items-center rounded-full bg-gradient-to-r px-3 py-1 text-xs font-medium border backdrop-blur-sm",
+          isDarkMode
+            ? "from-purple-500/20 to-pink-500/20 text-purple-300 border-purple-500/30"
+            : "from-purple-100 to-pink-100 text-purple-700 border-purple-300",
+        )}>
+          <span className={cn(
+            "mr-1.5 h-1.5 w-1.5 rounded-full animate-pulse",
+            isDarkMode ? "bg-purple-400" : "bg-purple-500",
+          )}></span>
           Beta - Under Development
         </span>
       </motion.div>
@@ -97,9 +120,15 @@ export function Navbar({ className }: NavbarProps) {
           <Link to={item.path} key={item.name}>
             <motion.button
               className={cn(
-                "relative mx-1 rounded-full px-4 py-2 text-sm font-medium text-white transition-colors",
+                "relative mx-1 rounded-full px-4 py-2 text-sm font-medium transition-colors duration-75",
                 scrolled ? "py-2" : "py-3", // Taller buttons initially
-                location.pathname === item.path ? "bg-white/10 text-white" : "text-gray-300 hover:text-white",
+                isDarkMode
+                  ? (location.pathname === item.path
+                      ? "bg-white/10 text-white"
+                      : "text-gray-300 hover:text-white")
+                  : (location.pathname === item.path
+                      ? "bg-purple-100 text-purple-800"
+                      : "bg-white/60 text-gray-900 hover:bg-purple-50 hover:text-purple-800"),
               )}
               whileHover={{ y: -2 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -128,7 +157,10 @@ export function Navbar({ className }: NavbarProps) {
           target="_blank"
           rel="noopener noreferrer"
           className={cn(
-            "flex items-center justify-center rounded-full bg-white/5 text-gray-300 backdrop-blur-lg transition-colors hover:bg-white/10 hover:text-white",
+            "flex items-center justify-center rounded-full backdrop-blur-lg transition-colors duration-75",
+            isDarkMode
+              ? "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"
+              : "bg-black/5 text-gray-900 hover:bg-purple-100 hover:text-purple-800",
             scrolled ? "h-10 px-4" : "h-12 px-5", // Larger button initially
           )}
           whileHover={{ scale: 1.05 }}
@@ -141,10 +173,13 @@ export function Navbar({ className }: NavbarProps) {
         {/* Theme Toggle */}
         <motion.button
           className={cn(
-            "flex items-center justify-center rounded-full bg-white/5 text-gray-300 backdrop-blur-lg transition-colors hover:bg-white/10 hover:text-white",
+            "flex items-center justify-center rounded-full backdrop-blur-lg transition-colors duration-75",
+            isDarkMode
+              ? "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"
+              : "bg-black/5 text-gray-900 hover:bg-purple-100 hover:text-purple-800",
             scrolled ? "h-10 w-10" : "h-12 w-12", // Larger button initially
           )}
-          onClick={() => setIsDarkMode(!isDarkMode)}
+          onClick={toggleTheme}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           aria-label="Toggle theme"
@@ -166,7 +201,10 @@ export function Navbar({ className }: NavbarProps) {
         {/* Mobile Menu Button */}
         <motion.button
           className={cn(
-            "flex items-center justify-center rounded-full bg-white/5 text-gray-300 backdrop-blur-lg transition-colors hover:bg-white/10 hover:text-white md:hidden",
+            "flex items-center justify-center rounded-full backdrop-blur-lg transition-colors md:hidden",
+            isDarkMode
+              ? "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"
+              : "bg-black/5 text-gray-900 hover:bg-purple-100 hover:text-purple-800",
             scrolled ? "h-10 w-10" : "h-12 w-12", // Larger button initially
           )}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -193,7 +231,10 @@ export function Navbar({ className }: NavbarProps) {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            className="absolute inset-x-0 top-16 z-20 bg-[#0d1117]/95 backdrop-blur-lg md:hidden"
+            className={cn(
+              "absolute inset-x-0 top-16 z-20 backdrop-blur-lg md:hidden",
+              isDarkMode ? "bg-[#0d1117]/95" : "bg-white/95",
+            )}
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -204,8 +245,10 @@ export function Navbar({ className }: NavbarProps) {
                 <Link to={item.path} key={item.name}>
                   <motion.button
                     className={cn(
-                      "my-1 rounded-lg px-4 py-3 text-left text-sm font-medium text-white transition-colors",
-                      location.pathname === item.path ? "bg-white/10 text-white" : "text-gray-300 hover:text-white",
+                      "my-1 rounded-lg px-4 py-3 text-left text-sm font-medium transition-colors",
+                      isDarkMode
+                        ? (location.pathname === item.path ? "bg-white/10 text-white" : "text-gray-300 hover:text-white")
+                        : (location.pathname === item.path ? "bg-purple-100 text-purple-800" : "bg-white/80 text-gray-900 hover:bg-purple-50 hover:text-purple-800"),
                     )}
                     onClick={() => {
                       setMobileMenuOpen(false)

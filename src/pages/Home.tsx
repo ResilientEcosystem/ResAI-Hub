@@ -2,8 +2,12 @@ import Lottie from "lottie-react";
 import animationData1 from "../assets/blockchainDB.json";
 import animationData2 from "../assets/resDBAI.json";
 import Carousel from "../components/ui/carousel";
+import { useTheme } from "../contexts/ThemeContext";
+import { cn } from "../lib/utils";
 
 const HomePage = () => {
+  const { isDarkMode } = useTheme();
+  
   return (
     <div className="min-h-screen">
       <div className="flex justify-center items-center h-full w-full">
@@ -25,11 +29,20 @@ const HomePage = () => {
         </div>
         {/* Right Side - Text */}
         <div className="flex-1 flex flex-col justify-center text-left ml-10">
-          <h1 className="text-6xl font-bold text-purple-300 mb-4">ResilientDB</h1>
-          <p className="text-xl text-gray-200 mb-2">
+          <h1 className={cn(
+            "text-6xl font-bold mb-4",
+            isDarkMode ? "text-purple-300" : "text-purple-600"
+          )}>ResilientDB</h1>
+          <p className={cn(
+            "text-xl mb-2",
+            isDarkMode ? "text-gray-200" : "text-gray-800"
+          )}>
             Global-Scale Sustainable Blockchain Fabric
           </p>
-          <p className="text-lg text-gray-400">
+          <p className={cn(
+            "text-lg",
+            isDarkMode ? "text-gray-400" : "text-gray-600"
+          )}>
             ResilientDB is a high-performance blockchain database designed for scalability, speed, and fault tolerance.
             It enables secure, decentralized applications with reliable data consistency.
           </p>
@@ -38,11 +51,20 @@ const HomePage = () => {
       <div className="w-full max-w-7xl flex flex-col md:flex-row items-center gap-12 mx-auto mt-15">
       {/* Left Side - Text */}
       <div className="flex-1 flex flex-col justify-center text-left ml-10">
-        <h1 className="text-6xl font-bold text-purple-300 mb-4">What is ResAI?</h1>
-        <p className="text-xl text-gray-200 mb-2">
+        <h1 className={cn(
+          "text-6xl font-bold mb-4",
+          isDarkMode ? "text-purple-300" : "text-purple-600"
+        )}>What is ResAI?</h1>
+        <p className={cn(
+          "text-xl mb-2",
+          isDarkMode ? "text-gray-200" : "text-gray-800"
+        )}>
           ResAI is your intelligent assistant for exploring ResilientDB and beyond.
         </p>
-        <p className="text-lg text-gray-400">
+        <p className={cn(
+          "text-lg",
+          isDarkMode ? "text-gray-400" : "text-gray-600"
+        )}>
         ResAI helps you interactively query documentation, understand consensus protocols, and connect research insights
         directly to the codebase — making complex systems more accessible and insightful.
         </p>

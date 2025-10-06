@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import { useTheme } from "../contexts/ThemeContext";
+import { cn } from "../lib/utils";
 
 interface Tool {
   id: string;
@@ -111,9 +113,10 @@ const tools: Tool[] = [
 
 const ToolsPage = () => {
   const [selectedTool, setSelectedTool] = useState<Tool | null>(null);
+  const { isDarkMode } = useTheme();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0d1117] to-[#170a28] py-32 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-[var(--app-gradient-start)] to-[var(--app-gradient-end)] py-32 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
@@ -122,7 +125,10 @@ const ToolsPage = () => {
               Our Tools
             </span>
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className={cn(
+            "text-xl max-w-3xl mx-auto",
+            isDarkMode ? "text-gray-300" : "text-gray-700"
+          )}>
             Discover the complete suite of AI-powered tools designed to enhance your experience with ResilientDB and blockchain technology.
           </p>
         </div>
@@ -132,7 +138,12 @@ const ToolsPage = () => {
           {tools.map((tool) => (
             <motion.div
               key={tool.id}
-              className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10 cursor-pointer group hover:bg-white/10 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20"
+              className={cn(
+                "backdrop-blur-lg rounded-xl p-6 border cursor-pointer group transition-all duration-75 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20",
+                isDarkMode 
+                  ? "bg-white/5 border-white/10 hover:bg-white/10" 
+                  : "bg-white/80 border-gray-200 hover:bg-white/90"
+              )}
               onClick={() => setSelectedTool(tool)}
               whileHover={{ y: -5 }}
             >
@@ -146,7 +157,10 @@ const ToolsPage = () => {
                       {tool.name}
                     </span>
                   </h3>
-                  <p className="text-gray-300 leading-relaxed">
+                  <p className={cn(
+                    "leading-relaxed",
+                    isDarkMode ? "text-gray-300" : "text-gray-700"
+                  )}>
                     {tool.shortDescription}
                   </p>
                 </div>
@@ -170,13 +184,23 @@ const ToolsPage = () => {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-              className="bg-[#0d1117] border border-white/20 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
+              className={cn(
+                "border rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative",
+                isDarkMode 
+                  ? "bg-[#0d1117] border-white/20" 
+                  : "bg-white border-gray-200"
+              )}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
               <button
                 onClick={() => setSelectedTool(null)}
-                className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10"
+                className={cn(
+                  "absolute top-4 right-4 transition-colors z-10",
+                  isDarkMode 
+                    ? "text-gray-400 hover:text-white" 
+                    : "text-gray-600 hover:text-gray-900"
+                )}
               >
                 <X size={24} />
               </button>
@@ -193,7 +217,10 @@ const ToolsPage = () => {
                         {selectedTool.name}
                       </span>
                     </h2>
-                    <p className="text-xl text-gray-300 leading-relaxed">
+                    <p className={cn(
+                      "text-xl leading-relaxed",
+                      isDarkMode ? "text-gray-300" : "text-gray-700"
+                    )}>
                       {selectedTool.longDescription}
                     </p>
                   </div>
@@ -203,10 +230,16 @@ const ToolsPage = () => {
                   {/* Features - Only show for actual tools */}
                   {selectedTool.id !== "coming-soon" && (
                     <div className="text-center">
-                      <h3 className="text-2xl font-bold mb-4 text-white">Key Features</h3>
+                      <h3 className={cn(
+                        "text-2xl font-bold mb-4",
+                        isDarkMode ? "text-white" : "text-gray-900"
+                      )}>Key Features</h3>
                       <ul className="space-y-2 inline-block text-left">
                         {selectedTool.features.map((feature, index) => (
-                          <li key={index} className="flex items-center text-gray-300">
+                          <li key={index} className={cn(
+                            "flex items-center",
+                            isDarkMode ? "text-gray-300" : "text-gray-700"
+                          )}>
                             <span className="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
                             {feature}
                           </li>
@@ -218,10 +251,16 @@ const ToolsPage = () => {
                   {/* Use Cases - Only show for actual tools */}
                   {selectedTool.id !== "coming-soon" && (
                     <div className="text-center">
-                      <h3 className="text-2xl font-bold mb-4 text-white">Use Cases</h3>
+                      <h3 className={cn(
+                        "text-2xl font-bold mb-4",
+                        isDarkMode ? "text-white" : "text-gray-900"
+                      )}>Use Cases</h3>
                       <ul className="space-y-2 inline-block text-left">
                         {selectedTool.useCases.map((useCase, index) => (
-                          <li key={index} className="flex items-center text-gray-300">
+                          <li key={index} className={cn(
+                            "flex items-center",
+                            isDarkMode ? "text-gray-300" : "text-gray-700"
+                          )}>
                             <span className="w-2 h-2 bg-cyan-500 rounded-full mr-3"></span>
                             {useCase}
                           </li>
@@ -237,7 +276,7 @@ const ToolsPage = () => {
                     href={selectedTool.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`inline-block px-8 py-4 bg-gradient-to-r ${selectedTool.color} hover:scale-105 rounded-lg text-white font-semibold shadow-lg transition-all duration-300`}
+                    className={`inline-block px-8 py-4 bg-gradient-to-r ${selectedTool.color} hover:scale-105 rounded-lg text-white font-semibold shadow-lg transition-all duration-75`}
                   >
                     {selectedTool.id === "coming-soon" ? "⭐ Star on GitHub" : `Launch ${selectedTool.name}`}
                   </a>
