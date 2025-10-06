@@ -1,7 +1,7 @@
 import Particles from "react-tsparticles";
 import { loadTrianglesPreset } from "tsparticles-preset-triangles";
 import { Engine } from "tsparticles-engine"; // Import the correct type
-import { useTheme } from "../contexts/ThemeContext";
+import { useTheme } from "../hooks/useTheme";
 
 export default function TrianglesBackground() {
     const { isDarkMode } = useTheme();

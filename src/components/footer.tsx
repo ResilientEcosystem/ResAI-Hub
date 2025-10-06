@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 import { Github, ExternalLink, Users, Info, Heart } from "lucide-react"
 import { motion } from "framer-motion"
 import { cn } from "../lib/utils"
-import { useTheme } from "../contexts/ThemeContext"
+import { useTheme } from "../hooks/useTheme"
 
 interface FooterProps extends React.HTMLAttributes<HTMLElement> {
   variant?: "solid" | "darker-gradient" | "subtle-pattern"

@@ -2,7 +2,7 @@ import Lottie from "lottie-react";
 import animationData1 from "../assets/blockchainDB.json";
 import animationData2 from "../assets/resDBAI.json";
 import Carousel from "../components/ui/carousel";
-import { useTheme } from "../contexts/ThemeContext";
+import { useTheme } from "../hooks/useTheme";
 import { cn } from "../lib/utils";
 
 const HomePage = () => {
